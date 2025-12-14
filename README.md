@@ -74,9 +74,19 @@ npm run dev
 
 Open `http://localhost:3000`
 
+### What You'll See
+
+**Without a video file**: A colored gradient background with the current time in HH:MM:SS format, changing throughout the day (morning orange, noon blue, evening red, night dark).
+
+**With a video file**: Your 24-hour loop playing fullscreen, synced to your local time.
+
+Either way, the label "Office Worker • [Day]" appears at the top.
+
 ### Adding a Video
 
-Replace `/public/video/day-loop.mp4` with your own 24-hour looped video.
+Place your 24-hour looped video at `/public/video/day-loop.mp4`
+
+The app will automatically detect it and use it instead of the fallback gradient.
 
 **Requirements:**
 
@@ -85,6 +95,18 @@ Replace `/public/video/day-loop.mp4` with your own 24-hour looped video.
 - Dimensions: 1920x1080 or higher
 - Frame rate: 24fps or 30fps
 - Aspect ratio: Any (will cover fullscreen)
+
+**To Generate a Quick Test Video:**
+
+See `/public/video/GENERATE_TEST_VIDEO.md` for FFmpeg commands to create a test video in seconds.
+
+Quick example (5-second test):
+```bash
+ffmpeg -f lavfi -i color=c=black:s=1920x1080:d=5 \
+  -vf "drawtext=text='%{pts\:hms}':fontsize=48:fontcolor=white:x=(w-text_w)/2:y=(h-text_h)/2" \
+  -c:v libx264 -preset medium -crf 23 \
+  public/video/day-loop.mp4
+```
 
 **Video Content Ideas:**
 
