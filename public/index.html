@@ -3,85 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Single Page App - Vanilla JS</title>
+  <title>360 Life Viewer</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <nav class="navbar">
-    <div class="navbar-container">
-      <div class="navbar-brand">
-        <h1>SPA App</h1>
-      </div>
-      <ul class="nav-menu">
-        <li><a href="#" data-page="home" class="nav-link active">Home</a></li>
-        <li><a href="#" data-page="about" class="nav-link">About</a></li>
-        <li><a href="#" data-page="contact" class="nav-link">Contact</a></li>
-      </ul>
+  <div class="viewer-container">
+    <div class="label-top">
+      <span class="life-name" id="lifeName">Office Worker</span>
+      <span class="separator">•</span>
+      <span class="day-name" id="dayName">Tuesday</span>
     </div>
-  </nav>
-
-  <main id="app" class="app-container">
-    <section id="page-home" class="page active">
-      <div class="page-content">
-        <h2>Welcome to Our Single Page App</h2>
-        <p>This is a modern single-page application built with vanilla HTML, CSS, and JavaScript.</p>
-        <div class="features">
-          <div class="feature-card">
-            <h3>Fast</h3>
-            <p>No frameworks overhead, just pure JavaScript performance.</p>
-          </div>
-          <div class="feature-card">
-            <h3>Simple</h3>
-            <p>Clean HTML structure with minimal dependencies.</p>
-          </div>
-          <div class="feature-card">
-            <h3>Responsive</h3>
-            <p>Works great on all devices and screen sizes.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="page-about" class="page">
-      <div class="page-content">
-        <h2>About Us</h2>
-        <p>We're building a demonstration of how powerful vanilla JavaScript can be.</p>
-        <h3>Why Vanilla JS?</h3>
-        <ul>
-          <li>Direct control over DOM manipulation</li>
-          <li>No framework overhead</li>
-          <li>Better performance for simple applications</li>
-          <li>Easier to understand and maintain</li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="page-contact" class="page">
-      <div class="page-content">
-        <h2>Contact Us</h2>
-        <form id="contact-form" class="contact-form">
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" required>
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
-          </div>
-          <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
-          </div>
-          <button type="submit" class="btn-submit">Send Message</button>
-        </form>
-        <div id="form-message" class="form-message"></div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <p>&copy; 2024 Single Page App. Built with Vanilla JavaScript.</p>
-  </footer>
+    <img id="imageViewer" class="image-viewer" src="images/morning.svg" alt="360 life view">
+  </div>
 
   <script src="app.js"></script>
 </body>

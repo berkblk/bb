@@ -1,34 +1,48 @@
-# Single Page Application - Vanilla JavaScript
+# 360° Life Viewer
 
-A modern single-page application built with vanilla HTML, CSS, and JavaScript. No frameworks, no unnecessary dependencies.
+A minimalist fullscreen viewer that displays 360-degree life images synchronized to the user's local time. Shows different perspectives throughout the day based on the current hour.
 
 ## Features
 
-- **Pure Vanilla JavaScript** - No frameworks or heavy libraries
-- **Responsive Design** - Works great on all devices
-- **Fast Performance** - Minimal overhead and optimized code
-- **Client-side Routing** - URL hash-based navigation
-- **Contact Form** - Functional form with validation and submission
-- **Clean Architecture** - Well-organized, maintainable code
+- **Fullscreen Display** - Immersive full viewport image experience
+- **Time-Synced Images** - Automatically displays the correct image based on current time
+- **Minimal UI** - Only a simple text label at the top, no buttons or interactions
+- **Automatic Refresh** - Images update every second as time progresses
+- **Responsive** - Works seamlessly on all screen sizes
+- **Pure Vanilla JavaScript** - No frameworks, no unnecessary overhead
 
 ## Project Structure
 
 ```
-.
-├── public/
-│   ├── index.html      # Main HTML entry point
-│   ├── styles.css      # Application styles
-│   ├── app.js          # Core application logic
-│   └── [other assets]
-├── package.json        # Project dependencies
-└── README.md          # This file
+public/
+├── index.html          # Main HTML (single page)
+├── styles.css          # Minimal CSS styling
+├── app.js              # Time-sync logic
+└── images/
+    ├── morning.svg     # 5 AM - 12 PM
+    ├── midday.svg      # 12 PM - 2 PM
+    ├── afternoon.svg   # 2 PM - 6 PM
+    ├── evening.svg     # 6 PM - 9 PM
+    └── night.svg       # 9 PM - 5 AM
 ```
 
+## How It Works
+
+### Time-Based Image Selection
+
+The viewer automatically selects images based on the current local time:
+
+- **Morning** (5:00 - 11:59): `morning.svg`
+- **Midday** (12:00 - 13:59): `midday.svg`
+- **Afternoon** (14:00 - 17:59): `afternoon.svg`
+- **Evening** (18:00 - 20:59): `evening.svg`
+- **Night** (21:00 - 4:59): `night.svg`
+
+### Day Display
+
+The current day of the week (Monday-Sunday) is automatically detected and displayed from the system date.
+
 ## Getting Started
-
-### Prerequisites
-
-- Node.js and npm (optional, for serving the app)
 
 ### Installation
 
@@ -38,84 +52,57 @@ npm install
 
 ### Development
 
-Run the development server:
-
 ```bash
 npm run dev
 ```
 
-The app will be available at `http://localhost:3000`
+The app will run on `http://localhost:3000`
 
-### Production Build
+### Usage
 
-```bash
-npm run build
+Simply open the page. The viewer will:
+1. Display the correct image based on your local time
+2. Show your life name and the current day at the top
+3. Automatically update the image every second as the time changes
+4. Require no interaction - just watch
+
+## Styling
+
+The design is intentionally minimal:
+- **Black background** - No distractions
+- **Fullscreen image** - Fills the entire viewport
+- **Small text label** - 14px text at top center
+- **No animations** - Pure, clean display
+- **No borders or clutter** - Full immersion
+
+## Customization
+
+You can easily customize the viewer by editing `app.js`:
+
+```javascript
+this.lifeName = 'Office Worker';  // Change the life name
+this.dayNames = [...]              // Days are auto-detected from system
+this.images = [...]                // Add or replace image paths
 ```
 
-### Running the Application
+## Browser Compatibility
 
-You can also open `public/index.html` directly in your browser. For best results with URL routing, use a local server:
-
-```bash
-npm start
-```
-
-## How It Works
-
-### Routing
-
-The application uses URL hash-based routing for client-side navigation:
-- `#home` - Home page
-- `#about` - About page
-- `#contact` - Contact page
-
-Navigation is handled entirely in JavaScript without page reloads.
-
-### Form Handling
-
-The contact form includes:
-- Input validation (required fields, email format)
-- Simulated form submission with loading state
-- Success/error messaging
-- Automatic form reset on successful submission
-
-### Browser Compatibility
-
-Works on all modern browsers that support:
+Works on all modern browsers supporting:
 - ES6 JavaScript
-- CSS Grid and Flexbox
-- HTML5 Form API
-- LocalStorage (optional, for future enhancements)
+- CSS Flexbox
+- HTML5 Image API
 
-## Code Style
+## Notes
 
-The project follows these conventions:
-- Camel case for JavaScript variables and functions
-- Kebab case for CSS class names
-- Semantic HTML markup
-- Mobile-first responsive design
-
-## Technologies Used
-
-- **HTML5** - Semantic markup
-- **CSS3** - Grid, Flexbox, CSS variables
-- **Vanilla JavaScript (ES6+)** - Core application logic
-- **http-server** - Local development server
+- Currently uses SVG placeholder images representing different times of day
+- The time sync uses the user's local system time
+- Images update every 1 second
+- No external dependencies required
 
 ## Future Enhancements
 
-Potential features that could be added:
-- Local storage for form data persistence
-- Additional pages and functionality
-- Animation improvements
-- Offline support with Service Workers
-- PWA capabilities
-- Unit tests
-
-## License
-
-MIT
-
-## Author
-
-Built as a demonstration of vanilla JavaScript capabilities.
+- Replace placeholder SVGs with actual 360-degree images
+- Add multiple life routines to cycle through
+- Implement gesture controls for panoramic viewing
+- Add audio based on time of day
+- Support for different timezones
