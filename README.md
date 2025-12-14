@@ -1,36 +1,121 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Single Page Application - Vanilla JavaScript
+
+A modern single-page application built with vanilla HTML, CSS, and JavaScript. No frameworks, no unnecessary dependencies.
+
+## Features
+
+- **Pure Vanilla JavaScript** - No frameworks or heavy libraries
+- **Responsive Design** - Works great on all devices
+- **Fast Performance** - Minimal overhead and optimized code
+- **Client-side Routing** - URL hash-based navigation
+- **Contact Form** - Functional form with validation and submission
+- **Clean Architecture** - Well-organized, maintainable code
+
+## Project Structure
+
+```
+.
+├── public/
+│   ├── index.html      # Main HTML entry point
+│   ├── styles.css      # Application styles
+│   ├── app.js          # Core application logic
+│   └── [other assets]
+├── package.json        # Project dependencies
+└── README.md          # This file
+```
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js and npm (optional, for serving the app)
+
+### Installation
+
+```bash
+npm install
+```
+
+### Development
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The app will be available at `http://localhost:3000`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Production Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+```
 
-## Learn More
+### Running the Application
 
-To learn more about Next.js, take a look at the following resources:
+You can also open `public/index.html` directly in your browser. For best results with URL routing, use a local server:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## How It Works
 
-## Deploy on Vercel
+### Routing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The application uses URL hash-based routing for client-side navigation:
+- `#home` - Home page
+- `#about` - About page
+- `#contact` - Contact page
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Navigation is handled entirely in JavaScript without page reloads.
+
+### Form Handling
+
+The contact form includes:
+- Input validation (required fields, email format)
+- Simulated form submission with loading state
+- Success/error messaging
+- Automatic form reset on successful submission
+
+### Browser Compatibility
+
+Works on all modern browsers that support:
+- ES6 JavaScript
+- CSS Grid and Flexbox
+- HTML5 Form API
+- LocalStorage (optional, for future enhancements)
+
+## Code Style
+
+The project follows these conventions:
+- Camel case for JavaScript variables and functions
+- Kebab case for CSS class names
+- Semantic HTML markup
+- Mobile-first responsive design
+
+## Technologies Used
+
+- **HTML5** - Semantic markup
+- **CSS3** - Grid, Flexbox, CSS variables
+- **Vanilla JavaScript (ES6+)** - Core application logic
+- **http-server** - Local development server
+
+## Future Enhancements
+
+Potential features that could be added:
+- Local storage for form data persistence
+- Additional pages and functionality
+- Animation improvements
+- Offline support with Service Workers
+- PWA capabilities
+- Unit tests
+
+## License
+
+MIT
+
+## Author
+
+Built as a demonstration of vanilla JavaScript capabilities.
