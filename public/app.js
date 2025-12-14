@@ -1,26 +1,24 @@
-class LifeViewer {
+class DayViewer {
   constructor() {
-    this.imageViewer = document.getElementById('imageViewer');
+    this.video = document.getElementById('lifeVideo');
     this.lifeNameEl = document.getElementById('lifeName');
     this.dayNameEl = document.getElementById('dayName');
-    
+
     this.lifeName = 'Office Worker';
-    this.dayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-    this.images = [
-      'images/morning.svg',
-      'images/midday.svg',
-      'images/afternoon.svg',
-      'images/evening.svg',
-      'images/night.svg'
-    ];
-    
+    this.dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    this.videoSrc = 'video/day-loop.mp4';
+    this.videoDuration = 86400;
+
+    this.synced = false;
+
     this.init();
   }
 
   init() {
     this.setLabels();
-    this.updateImageFromTime();
-    setInterval(() => this.updateImageFromTime(), 1000);
+    this.setupVideo();
+    this.setupEventListeners();
+    this.syncTimeOnce();
   }
 
   setLabels() {
@@ -30,33 +28,55 @@ class LifeViewer {
     this.dayNameEl.textContent = this.dayNames[dayIndex];
   }
 
-  getImageIndex() {
-    const now = new Date();
-    const hours = now.getHours();
-    
-    if (hours >= 5 && hours < 12) {
-      return 0;
-    } else if (hours >= 12 && hours < 14) {
-      return 1;
-    } else if (hours >= 14 && hours < 18) {
-      return 2;
-    } else if (hours >= 18 && hours < 21) {
-      return 3;
-    } else {
-      return 4;
-    }
+  setupVideo() {
+    this.video.src = this.videoSrc;
+    this.video.muted = true;
+    this.video.loop = true;
+    this.video.autoplay = true;
+    this.video.playsInline = true;
   }
 
-  updateImageFromTime() {
-    const imageIndex = this.getImageIndex();
-    this.imageViewer.src = this.images[imageIndex];
+  setupEventListeners() {
+    this.video.addEventListener('loadedmetadata', () => {
+      this.videoDuration = this.video.duration;
+      this.syncTimeOnce();
+    });
+
+    this.video.addEventListener('ended', () => {
+      this.syncTimeOnce();
+    });
+
+    window.addEventListener('focus', () => {
+      this.syncTimeOnce();
+    });
+  }
+
+  getCurrentTimeInDay() {
+    const now = new Date();
+    const secondsSinceMidnight = (now.getHours() * 3600) + (now.getMinutes() * 60) + now.getSeconds();
+    return secondsSinceMidnight;
+  }
+
+  syncTimeOnce() {
+    if (!this.video.paused && this.synced) {
+      return;
+    }
+
+    const currentSecond = this.getCurrentTimeInDay();
+    const playbackPosition = (currentSecond / this.videoDuration) * this.videoDuration;
+
+    this.video.currentTime = playbackPosition;
+    this.synced = true;
+
+    this.video.play().catch(() => {
+    });
   }
 }
 
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
-    window.viewer = new LifeViewer();
+    window.viewer = new DayViewer();
   });
 } else {
-  window.viewer = new LifeViewer();
+  window.viewer = new DayViewer();
 }

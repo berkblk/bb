@@ -1,48 +1,64 @@
-# 360° Life Viewer
+# A Day Somewhere Else
 
-A minimalist fullscreen viewer that displays 360-degree life images synchronized to the user's local time. Shows different perspectives throughout the day based on the current hour.
+An anti-stimulation web experience. Open it, and watch another life loop forever.
 
-## Features
+No choices. No buttons. No bullshit.
 
-- **Fullscreen Display** - Immersive full viewport image experience
-- **Time-Synced Images** - Automatically displays the correct image based on current time
-- **Minimal UI** - Only a simple text label at the top, no buttons or interactions
-- **Automatic Refresh** - Images update every second as time progresses
-- **Responsive** - Works seamlessly on all screen sizes
-- **Pure Vanilla JavaScript** - No frameworks, no unnecessary overhead
+Just one fullscreen 24-hour life loop, synced to your real time.
+
+## The Concept
+
+You open the site. A video starts playing.
+
+It's someone's entire day:
+
+- 5:00 AM → Wake up
+- 9:00 AM → Work
+- 12:00 PM → Lunch
+- 3:00 PM → Afternoon routine
+- 6:00 PM → Evening wind-down
+- 11:00 PM → Sleep
+- 12:00 AM → Night silence
+- Back to 5:00 AM → Loop
+
+The video loops forever. You watch. No interaction. No UI clutter.
+
+A tiny label at the top shows which life you're watching and what day it is.
+
+That's it.
+
+## Why This Works
+
+**Time Sync**: At 14:00 in real life, you see the 14:00 part of the loop.
+
+Come back at 3:00 AM? You see the sleep phase.
+
+Same loop, different context.
+
+It becomes a window into another existence.
+
+**Anti-Dopamine**: 
+
+- No notifications
+- No infinite scroll
+- No choices
+- No metrics
+- No goals
+
+Just passive observation. Weirdly calming.
 
 ## Project Structure
 
 ```
 public/
-├── index.html          # Main HTML (single page)
-├── styles.css          # Minimal CSS styling
-├── app.js              # Time-sync logic
-└── images/
-    ├── morning.svg     # 5 AM - 12 PM
-    ├── midday.svg      # 12 PM - 2 PM
-    ├── afternoon.svg   # 2 PM - 6 PM
-    ├── evening.svg     # 6 PM - 9 PM
-    └── night.svg       # 9 PM - 5 AM
+├── index.html           # Single fullscreen page
+├── styles.css           # Minimal CSS (black bg, fullscreen)
+├── app.js               # Core logic: video sync, labels, autoplay
+└── video/
+    └── day-loop.mp4     # 24-hour looped video (YOU ADD THIS)
 ```
 
-## How It Works
-
-### Time-Based Image Selection
-
-The viewer automatically selects images based on the current local time:
-
-- **Morning** (5:00 - 11:59): `morning.svg`
-- **Midday** (12:00 - 13:59): `midday.svg`
-- **Afternoon** (14:00 - 17:59): `afternoon.svg`
-- **Evening** (18:00 - 20:59): `evening.svg`
-- **Night** (21:00 - 4:59): `night.svg`
-
-### Day Display
-
-The current day of the week (Monday-Sunday) is automatically detected and displayed from the system date.
-
-## Getting Started
+## How to Use
 
 ### Installation
 
@@ -56,53 +72,150 @@ npm install
 npm run dev
 ```
 
-The app will run on `http://localhost:3000`
+Open `http://localhost:3000`
 
-### Usage
+### Adding a Video
 
-Simply open the page. The viewer will:
-1. Display the correct image based on your local time
-2. Show your life name and the current day at the top
-3. Automatically update the image every second as the time changes
-4. Require no interaction - just watch
+Replace `/public/video/day-loop.mp4` with your own 24-hour looped video.
 
-## Styling
+**Requirements:**
 
-The design is intentionally minimal:
-- **Black background** - No distractions
-- **Fullscreen image** - Fills the entire viewport
-- **Small text label** - 14px text at top center
-- **No animations** - Pure, clean display
-- **No borders or clutter** - Full immersion
+- Format: MP4 (H.264 video, AAC audio or no audio)
+- Duration: ~86400 seconds (24 hours) or more
+- Dimensions: 1920x1080 or higher
+- Frame rate: 24fps or 30fps
+- Aspect ratio: Any (will cover fullscreen)
 
-## Customization
+**Video Content Ideas:**
 
-You can easily customize the viewer by editing `app.js`:
+- Stock footage montages synced to 24h cycle
+- AI-generated scenes
+- Stylized animation loop
+- Stitched real footage with time-lapse
+- Cinematic ambient scenes
+
+### Customizing the Life Name
+
+Edit `app.js`:
 
 ```javascript
-this.lifeName = 'Office Worker';  // Change the life name
-this.dayNames = [...]              // Days are auto-detected from system
-this.images = [...]                // Add or replace image paths
+this.lifeName = 'Office Worker';  // Change this
 ```
 
-## Browser Compatibility
+### Customizing Day Names
 
-Works on all modern browsers supporting:
+The day is auto-detected from your system date (Monday, Tuesday, etc.).
+
+To override, edit the `dayNames` array in `app.js`.
+
+## How the Time Sync Works
+
+When you load the page:
+
+1. Get current time: 14:35:22
+2. Calculate seconds since midnight: (14 × 3600) + (35 × 60) + 22 = 52522
+3. Seek video to that position
+4. Play from there
+5. When video loops, sync again
+
+Result: Users always see the correct "time of day" in the loop.
+
+If the video is 24 hours long (86400 seconds), perfect alignment.
+
+If shorter, it loops more frequently (still time-synced).
+
+## Browser Support
+
+Works on:
+- Chrome/Edge 60+
+- Firefox 55+
+- Safari 11+
+- Mobile browsers (iOS Safari, Chrome Mobile)
+
+Requires:
+- HTML5 video element
 - ES6 JavaScript
-- CSS Flexbox
-- HTML5 Image API
+- CORS support for video files
+
+## No Dependencies
+
+- No Node.js framework
+- No build process
+- No external libraries
+- Pure vanilla HTML/CSS/JavaScript
+
+## Styling Notes
+
+**Black background**: No visual distractions.
+
+**Fullscreen video**: `object-fit: cover` fills the entire viewport, maintaining aspect ratio.
+
+**Minimal label**: Small text at top center, semi-transparent background.
+
+**No controls**: Video plays silently, loops endlessly.
+
+**No interactions**: User cannot pause, seek, or change volume.
+
+## Performance
+
+- Lightweight: ~5KB gzipped (HTML + CSS + JS)
+- No rendering overhead
+- Efficient DOM
+- Browser handles video decoding
+- Works on low-end devices
+
+## Future Ideas
+
+**Multiple Lives**:
+- Office Worker
+- Café Barista
+- Night Security Guard
+- Flight Attendant
+- Small-Town Farmer
+
+Pick on landing page (if you want interactivity later).
+
+**Ambient Soundscapes**:
+- Optional audio packs
+- Muted by default
+- Different moods per life
+
+**Offline Mode**:
+- Download loop locally
+- Service Worker caching
+- Works without internet
+
+**Time-Zone Support**:
+- Sync to any timezone
+- Travel vibe
+- See "foreign" time flow
 
 ## Notes
 
-- Currently uses SVG placeholder images representing different times of day
-- The time sync uses the user's local system time
-- Images update every 1 second
-- No external dependencies required
+- Video must be properly encoded for web
+- CORS headers required for CDN hosting
+- Preloading strategy: lazy load on page focus
+- Idle detection possible (pause if inactive)
+- Mobile: Works fullscreen, respects notches
 
-## Future Enhancements
+## Philosophy
 
-- Replace placeholder SVGs with actual 360-degree images
-- Add multiple life routines to cycle through
-- Implement gesture controls for panoramic viewing
-- Add audio based on time of day
-- Support for different timezones
+This app is intentionally:
+
+❌ Not a game
+❌ Not productive
+❌ Not social
+❌ Not quantified
+❌ Not infinite-scroll
+❌ Not algorithmic
+
+✅ Meditative
+✅ Low-pressure
+✅ Immersive
+✅ Time-aware
+✅ Hypnotic
+✅ Honest
+
+It's a fake window.
+
+That's the point.
