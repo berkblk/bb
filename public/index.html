@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Day Somewhere Else</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="viewer-container">
+    <div class="label-top">
+      <span class="life-name" id="lifeName">Office Worker</span>
+      <span class="separator">•</span>
+      <span class="day-name" id="dayName">Tuesday</span>
+    </div>
+    <video id="lifeVideo" class="life-video" autoplay muted loop playsinline></video>
+    <div id="fallback" class="fallback">
+      <div class="fallback-content">
+        <p class="fallback-message">Waiting for video...</p>
+        <p class="fallback-time" id="fallback-time">00:00:00</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
