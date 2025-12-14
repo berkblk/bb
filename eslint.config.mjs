@@ -5,7 +5,7 @@ export default [
     ignores: ['node_modules/', '.git/', 'public/*.svg'],
   },
   {
-    files: ['**/*.js'],
+    files: ['public/**/*.js'],
     languageOptions: {
       sourceType: 'module',
       globals: {
@@ -17,6 +17,22 @@ export default [
         clearTimeout: 'readonly',
         setInterval: 'readonly',
         clearInterval: 'readonly',
+      },
+    },
+    rules: {
+      ...js.configs.recommended.rules,
+      'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+    },
+  },
+  {
+    files: ['scripts/**/*.js'],
+    languageOptions: {
+      sourceType: 'commonjs',
+      globals: {
+        console: 'readonly',
+        process: 'readonly',
+        require: 'readonly',
+        __dirname: 'readonly',
       },
     },
     rules: {

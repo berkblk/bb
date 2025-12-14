@@ -76,37 +76,75 @@ Open `http://localhost:3000`
 
 ### What You'll See
 
-**Without a video file**: A colored gradient background with the current time in HH:MM:SS format, changing throughout the day (morning orange, noon blue, evening red, night dark).
+**Without a video file** (right now): A colored gradient background with the current time in HH:MM:SS format. It changes throughout the day (morning orange, noon blue, evening red, night dark). The label "Office Worker • [Day]" appears at the top.
 
-**With a video file**: Your 24-hour loop playing fullscreen, synced to your local time.
+**With a video file**: Your 24-hour loop playing fullscreen, synced to your local time. Same label at top.
 
-Either way, the label "Office Worker • [Day]" appears at the top.
+---
 
-### Adding a Video
+## Getting a Video (Real Solutions)
 
-Place your 24-hour looped video at `/public/video/day-loop.mp4`
+Don't know where to get a 24-hour video? Read `/public/video/CREATE_VIDEO_EASY.md` for actual, practical options.
 
-The app will automatically detect it and use it instead of the fallback gradient.
+**TL;DR options:**
+
+### Fastest (1 minute)
+
+Use the fallback. It already works and looks cool.
+
+### Super Fast (5 minutes)
+
+Generate a test video automatically:
+
+**macOS/Linux:**
+```bash
+chmod +x scripts/generate-test-video.sh
+./scripts/generate-test-video.sh
+```
+
+**Windows/All platforms:**
+```bash
+node scripts/generate-test-video.js
+```
+
+Both scripts will ask how long you want the video (10 sec to 24 hours) and generate it for you.
+
+### Easy (1-2 hours)
+
+Stitch together free stock video clips:
+- Download clips from Pexels, Pixabay, or Unsplash
+- Combine them with FFmpeg or iMovie
+- Result: A real, beautiful 24-hour loop
+
+See `/public/video/CREATE_VIDEO_EASY.md` for detailed instructions.
+
+### Smart (30 minutes, costs $5-15)
+
+Use AI video generation (Runway.ml, Synthesia, etc.):
+- Write a prompt about the life you want
+- Generate 30-second clip
+- Use our scripts to extend it
+- Get a professional-looking video
+
+See `/public/video/CREATE_VIDEO_EASY.md` for specific tools and how to use them.
+
+---
+
+### Manually Adding a Video
+
+If you already have a video file:
+
+1. Place it at `/public/video/day-loop.mp4`
+2. Restart the dev server
+3. Video plays automatically, synced to your local time
 
 **Requirements:**
 
-- Format: MP4 (H.264 video, AAC audio or no audio)
-- Duration: ~86400 seconds (24 hours) or more
+- Format: MP4 (H.264 video)
+- Duration: Any length (will loop and time-sync)
 - Dimensions: 1920x1080 or higher
 - Frame rate: 24fps or 30fps
 - Aspect ratio: Any (will cover fullscreen)
-
-**To Generate a Quick Test Video:**
-
-See `/public/video/GENERATE_TEST_VIDEO.md` for FFmpeg commands to create a test video in seconds.
-
-Quick example (5-second test):
-```bash
-ffmpeg -f lavfi -i color=c=black:s=1920x1080:d=5 \
-  -vf "drawtext=text='%{pts\:hms}':fontsize=48:fontcolor=white:x=(w-text_w)/2:y=(h-text_h)/2" \
-  -c:v libx264 -preset medium -crf 23 \
-  public/video/day-loop.mp4
-```
 
 **Video Content Ideas:**
 
